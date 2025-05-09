@@ -1,17 +1,37 @@
+from flask import Flask, render_template, request
 import sqlite3
 
-def studentData():
+app = Flask(__name__)
+
+def get_db():
     con = sqlite3.connect("student-database.db")
-    cur = con.cursor()
-    cur.execute("""
-                CREATE TABLE IF NOT EXISTS student (
-                id INTEGER PRIMARY KEY, 
-                StudentID INTEGER,
-                FirstName TEXT,
-                LastName TEXT,
-                DateOfBirth DATE,
-                Address TEXT, 
-                PhoneNumber TEXT, 
-                )""")
-    con.commit()
-    con.close()
+    con.row_factory = sqlite3.Row
+    return con
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/add_student', methods = ['POST'])
+def add_student():
+    if request.method == 'POST':
+        student_id = request.form['StudentID']
+        first_name = request.form['FirstName']
+        last_name = request.form['LastName']
+        dob = request.form['DateOfBirth']
+        address = request.form['Address']
+        phone_number = request.form['PhoneNumber']
+
+        con = get_db()
+        cur = con.cursor()
+        cur.execute("""
+                    INSERT INTO student(StudentID, FirstName, LastName, DateOfBirth, Address, PhoneNumber)
+                    VALUES (?, ?, ?, ?, ?, ?) """, 
+                    (student_id, first_name, last_name, dob, address, phone_number))
+        con.commit()
+        con.close()
+
+        return 'Student added successfully'
+    
+if __name__ == '__name__':
+    app.run(debug = True)
