@@ -8,6 +8,25 @@ def get_db():
     con.row_factory = sqlite3.Row
     return con
 
+def create_student_database():
+    con = get_db()
+    cur = con.cursor()
+    cur.execute("""
+                CREATE TABLE IF NOT EXISTS student(
+                    StudentID TEXT PRIMARY KEY,
+                    FirstName TEXT NOT NULL,
+                    LastName TEXT NOT NULL,
+                    DateOfBirth DATE,
+                    Address TEXT,
+                    PhoneNumber TEXT);
+                """)
+    con.commit()
+    con.close()
+
+@app.before_request
+def initialize():
+    create_student_database()
+
 @app.route('/')
 def index():
     return render_template('frontend.html')
