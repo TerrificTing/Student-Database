@@ -51,6 +51,17 @@ def add_student():
         con.close()
 
         return 'Student added successfully'
-    
+
+@app.route('/students')
+def view_data():
+    con = sqlite3.connect("student-database.db")
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+    cur.execute("SELECT * FROM student")
+    rows = cur.fetchall()
+    con.close()
+
+    return render_template('students.html', students = rows)
+
 if __name__ == '__main__':
     app.run(debug = True)

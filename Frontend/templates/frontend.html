@@ -6,13 +6,13 @@
         <title>Student Registration</title>
     </head>
     <body>
-        <h2>Student Registration Form</h2>
+        <h1>Student Registration Form</h1>
         <form action = "/add_student" method = "post">
             <label for = "StudentID">Student ID</label>
             <input type = "text" id = "StudentID" name = "StudentID" required>
 
             <label for = "FirstName">First Name</label> 
-            <input type = "text" id = "FirstName" name = "FirstName" requried>
+            <input type = "text" id = "FirstName" name = "FirstName" required>
 
             <label for = "LastName">Last Name</label>
             <input type = "text" id = "LastName" name = "LastName" required>
@@ -28,5 +28,6 @@
 
             <button type = "submit">Add Student</button>
         </form>
+        <a href="/students">View Students</a>
     </body>
 </html>
