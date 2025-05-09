@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 import sqlite3
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder = '../Frontend/templates', static_folder = '../Frontend/static')
 
 def get_db():
     con = sqlite3.connect("student-database.db")
@@ -10,7 +10,7 @@ def get_db():
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('frontend.html')
 
 @app.route('/add_student', methods = ['POST'])
 def add_student():
@@ -33,5 +33,5 @@ def add_student():
 
         return 'Student added successfully'
     
-if __name__ == '__name__':
+if __name__ == '__main__':
     app.run(debug = True)
