@@ -9,21 +9,17 @@
     <h1>List of Students</h1>
     <table border="1">
         <tr>
-            <th>Student ID</th>
+            <th>Student Number</th>
             <th>First Name</th>
             <th>Last Name</th>
-            <th>Date of Birth</th>
-            <th>Address</th>
-            <th>Phone Number</th>
+            <th>Enrollment Date</th>
         </tr>
         {% for student in students %}
         <tr>
-            <td>{{ student["StudentID"] }}</td>
+            <td>{{ student["StudentNumber"] }}</td>
             <td>{{ student["FirstName"] }}</td>
             <td>{{ student["LastName"] }}</td>
-            <td>{{ student["DateOfBirth"] }}</td>
-            <td>{{ student["Address"] }}</td>
-            <td>{{ student["PhoneNumber"] }}</td>
+            <td>{{ student["EnrollmentDate"] }}</td>
         </tr>
         {% endfor %}
     </table>
