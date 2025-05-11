@@ -3,25 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>List of Students</title>
+    <title>List of Students Grouped by Week</title>
 </head>
 <body>
-    <h1>List of Students</h1>
-    <table border="1">
-        <tr>
-            <th>Student Number</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Enrollment Date</th>
-        </tr>
-        {% for student in students %}
-        <tr>
-            <td>{{ student["StudentNumber"] }}</td>
-            <td>{{ student["FirstName"] }}</td>
-            <td>{{ student["LastName"] }}</td>
-            <td>{{ student["EnrollmentDate"] }}</td>
-        </tr>
-        {% endfor %}
-    </table>
+    <h1>List of Students Grouped by Week</h1>
+
+    {% for week, students_in_week in students_by_week.items() %}
+        <h2>Week {{ week }}</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Student Number</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Enrollment Date</th>
+                    <th>Day of the Week</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students_in_week %}
+                    <tr>
+                        <td>{{ student["StudentNumber"] }}</td>
+                        <td>{{ student["FirstName"] }}</td>
+                        <td>{{ student["LastName"] }}</td>
+                        <td>{{ student["EnrollmentDate"] }}</td>
+                        <td>{{ student["DayOfWeek"] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+    {% endfor %}
+
 </body>
 </html>

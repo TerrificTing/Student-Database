@@ -1,3 +1,4 @@
+from collections import defaultdict
 from flask import Flask, request, render_template, redirect, url_for
 import sqlite3
 from datetime import datetime
@@ -83,7 +84,20 @@ def view_data():
     rows = cur.fetchall()
     con.close()
 
-    return render_template('students.html', students = rows)
+    # Group students by calculated week number
+    students_by_week = defaultdict(list)
+    for student in rows:
+        # Convert Row to a dictionary
+        student_dict = dict(student)
+        enrollment_date = datetime.strptime(student_dict["EnrollmentDate"], "%Y-%m-%d")
+        week_number = enrollment_date.isocalendar()[1]  # Get ISO week number
+        day_of_week = enrollment_date.strftime("%A")  # Get full weekday name
+        student_dict["DayOfWeek"] = day_of_week  # Add day of week to student data
+        students_by_week[week_number].append(student_dict)
+
+    sorted_weeks = dict(sorted(students_by_week.items(), key=lambda x: x[0], reverse=True))
+
+    return render_template('students.html', students_by_week=sorted_weeks)
 
 if __name__ == '__main__':
     app.run(debug = True)
