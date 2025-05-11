@@ -1,0 +1,72 @@
+/* Apply Flexbox to label and input elements */
+form {
+    display: flex;
+    flex-direction: column;  /* Stack the form elements vertically */
+    gap: 10px;  /* Space between each form element */
+}
+
+/* Flexbox for label and input pair */
+label,
+input {
+    display: inline-block;  /* Makes them line up next to each other */
+    margin-bottom: 8px;
+}
+
+/* Wrap the label and input in a div to align them side-by-side */
+.form-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+input[type="text"] {
+    width: 70%;  /* Adjust width as per preference */
+    padding: 8px;
+    margin-left: 10px;  /* Add some space between the label and the input */
+}
+
+/* Styling the form and other elements */
+form {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+/* Form heading */
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Button styling */
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Link styling */
+a {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    color: #007BFF;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
