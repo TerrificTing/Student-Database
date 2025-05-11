@@ -1,0 +1,28 @@
+/* CSS styles for different days of the week */
+.monday {
+    background-color: lightblue;
+}
+
+.tuesday {
+    background-color: lightgreen;
+}
+
+.wednesday {
+    background-color: lightyellow;
+}
+
+.thursday {
+    background-color: lightcoral;
+}
+
+.friday {
+    background-color: lightpink;
+}
+
+.saturday {
+    background-color: lightgray;
+}
+
+.sunday {
+    background-color: lightgoldenrodyellow;
+}
