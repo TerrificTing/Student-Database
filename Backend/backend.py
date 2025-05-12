@@ -75,6 +75,15 @@ def add_student():
 
         return redirect(url_for('view_data'))
 
+@app.route('/delete_student/<first_name>/<last_name>')
+def delete_student(first_name, last_name):
+    con = get_db()
+    cur = con.cursor()
+    cur.execute('DELETE FROM student WHERE FirstName = ? and LastName = ?', (first_name, last_name))
+    con.commit()
+    con.close()
+    return redirect(url_for('view_data'))
+
 @app.route('/students')
 def view_data():
     con = sqlite3.connect("student-database.db")
