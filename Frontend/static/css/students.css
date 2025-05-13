@@ -1,30 +1,32 @@
 /* CSS styles for different days of the week */
 .monday {
-    background-color: lightblue;
+    --day_color: lightblue;
+    background-color: var(--day_color);
 }
 
 .tuesday {
-    background-color: lightgreen;
-}
+    --day_color: lightgreen;
+    background-color: var(--day_color);}
 
 .wednesday {
-    background-color: lightyellow;
-}
+    --day_color: lightyellow;
+    background-color: var(--day_color);}
 
 .thursday {
-    background-color: lightcoral;
-}
+    --day_color: lightcoral;
+    background-color: var(--day_color);}
 
 .friday {
-    background-color: lightpink;
-}
+    --day_color: lightpink;
+    background-color: var(--day_color);}
 
 .saturday {
-    background-color: lightgray;
-}
+    --day_color: lightgray;
+    background-color: var(--day_color);}
 
 .sunday {
-    background-color: lightgoldenrodyellow;
+    --day_color: lightgoldenrodyellow;
+    background-color: var(--day_color);
 }
 
 /* Link styling */
@@ -37,4 +39,31 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+button {
+    display: block; /* Make the button a block-level element */
+    width: 100%; /* Make the button take up the full width of the cell */
+    height: 100%; /* Make the button take up the full height of the cell */
+    padding: 0; /* Remove padding to ensure it fills the cell completely */
+    font-size: 2rem; /* Adjust font size to make the "X" large */
+    background-color: transparent; /* Make background transparent */
+    border: none; /* Remove border */
+    color: inherit; /* Inherit text color from parent */
+    cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
+    text-align: center; /* Center the "X" horizontally */
+    line-height: 1; /* Adjust line height to center the "X" vertically */
+}
+
+
+button:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+td {
+    padding: 0; /* Remove default padding */
+    height: 100%; /* Allow the cell to expand fully */
+    vertical-align: middle;
+    text-align: center;
 }
