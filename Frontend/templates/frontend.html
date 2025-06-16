@@ -1,27 +1,20 @@
 <!DOCTYPE html>
-<html lang = "en">
-    <head>
-        <meta charset = "UTF-8">
-        <meta name = "viewport" content = "width = device-width, initial-scale = 1.0">
-        <title>Student Registration</title>
-        <link rel = "stylesheet" href= "../static/css/frontend.css">
-    </head>
-    <body>
-        <h1>Student Registration Form</h1>
-        <form action = "/add_student" method = "post">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login with Google</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Student Portal</h1>
+        <p>Click the button below to login with Google:</p>
+        <a href="{{ url_for('google.login') }}" class="google-login-btn">
+            <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png" alt="Login with Google">
+        </a>
+    </div>
 
-            <div class="form-group">
-                <label for="FirstName">First Name</label>
-                <input type="text" id="FirstName" name="FirstName" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="LastName">Last Name</label>
-                <input type="text" id="LastName" name="LastName" required>
-            </div>
-
-            <button type = "submit">Add Student</button>
-        </form>
-        <a href="/students">View Students</a>
-    </body>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
 </html>
