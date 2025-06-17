@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from Backend.auth import google_bp  # Import the Google login blueprint
+from Backend.api.auth import google_bp  # Import the Google login blueprint
 import os
 
 def create_app():
