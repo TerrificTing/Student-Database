@@ -13,3 +13,4 @@ Flask
 serverless-wsgi
 flask-cors
 python-dotenv
+flask-dance
