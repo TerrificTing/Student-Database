@@ -2,11 +2,12 @@ import sys
 import os
 from dotenv import load_dotenv
 from flask import url_for, Flask
+from serverless_wsgi import handle_request
 
 # Load environment variables from .env file
 load_dotenv()
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
 from Backend.api.auth import google_bp 
 
@@ -31,6 +32,7 @@ def create_app():
 
     return app
 
-if __name__ == "__main__":
-    app = create_app()
-    app.run(debug=True)  # Run the app in debug mode for development
+app = create_app()
+
+def handeler(event, context):
+    return handle_request(app, event, context)

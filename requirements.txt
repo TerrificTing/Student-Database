@@ -12,3 +12,4 @@ URLObject==2.4.3
 Flask
 serverless-wsgi
 flask-cors
+python-dotenv
