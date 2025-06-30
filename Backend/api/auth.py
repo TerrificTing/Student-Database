@@ -3,7 +3,7 @@ from flask_dance.contrib.google import make_google_blueprint, google
 from flask_login import login_user
 import os
 from dotenv import load_dotenv
-from Backend.models import User, get_db
+from Backend.api.models import User, get_db
 
 # Load environment variables from .env file
 load_dotenv()

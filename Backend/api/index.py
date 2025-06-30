@@ -8,7 +8,7 @@ load_dotenv()
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from Backend.auth import google_bp 
+from Backend.api.auth import google_bp 
 
 def create_app():
     app = Flask(__name__)
