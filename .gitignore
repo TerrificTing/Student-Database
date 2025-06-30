@@ -9,7 +9,13 @@ __pycache__/
 
 # Ignore .env files if you use them for environment variables
 .env
+.flaskenv
 
 # Ignore IDE-specific files
 .vscode/
 .idea/
+
+# Ignore Vercel Analytics 
+node_modules/
+package-lock.json
+package.json
