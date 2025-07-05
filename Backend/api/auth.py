@@ -23,6 +23,8 @@ def google_login():
 
     # Get user info from Google
     google_info = google.get("/v1/people/me")
+    print('Google response OK?', google_info.ok)
+    print('Google response text?', google_info.text)    
     assert google_info.ok, google_info.text
     user_info = google_info.json()
 
