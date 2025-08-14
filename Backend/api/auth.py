@@ -12,7 +12,8 @@ load_dotenv()
 google_bp = make_google_blueprint(
     client_id = os.getenv("GOOGLE_CLIENT_ID"),  # Load from .env
     client_secret = os.getenv("GOOGLE_CLIENT_SECRET"),  # Load from .env
-    redirect_to = "google.login"
+    scope=["profile", "email"],
+    redirect_to = "google_login"
 )
 
 # Define Google login route
@@ -28,22 +29,22 @@ def google_login():
     assert google_info.ok, google_info.text
     user_info = google_info.json()
 
-    google_id = user_info["id"]
+    google_info = google.get("/oauth2/v2/userinfo")
     username = user_info["displayName"]
 
     # Check if the user already exists in the database
     con = get_db()
     cur = con.cursor()
-    cur.execute('SELECT * FROM users WHERE google_id = ?', (google_id,))
+    cur.execute('SELECT * FROM users WHERE google_id = ?', (google_info,))
     user = cur.fetchone()
 
     if not user:
         # If the user doesn't exist, create a new one
-        cur.execute('INSERT INTO users (google_id, username) VALUES (?, ?)', (google_id, username))
+        cur.execute('INSERT INTO users (google_id, username) VALUES (?, ?)', (google_info, username))
         con.commit()
 
     # Create a User instance and log the user in
-    user = User(id=google_id, username=username)
+    user = User(id=google_info, username=username)
     login_user(user)
 
     return redirect(url_for("dashboard"))
