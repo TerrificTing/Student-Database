@@ -32,9 +32,6 @@ def google_login():
     # Debug print for development
     print("Google user info:", user_info)
 
-
-    username = user_info["displayName"]
-
     # Check if the user already exists in the database
     con = get_db()
     cur = con.cursor()
