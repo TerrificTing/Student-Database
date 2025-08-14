@@ -4,6 +4,7 @@ from flask_login import login_user
 import os
 from dotenv import load_dotenv
 from Backend.api.models import User, get_db
+from requests.exceptions import HTTPError
 
 # Load environment variables from .env file
 load_dotenv()
@@ -33,9 +34,12 @@ def google_login():
         if not google.authorized:
             return redirect(url_for("google.login"))
 
-        # Get user info from Google
-        google_info = google.get("/oauth2/v2/userinfo")
-
+        try:
+            # Get user info from Google
+            google_info = google.get("/oauth2/v2/userinfo")
+            google_info.raise_for_status()
+        except HTTPError as e:
+            print('Token expired or API error', e)
         user_info = google_info.json()
         google_id = user_info.get("id")
         username = user_info.get("name")
