@@ -6,7 +6,8 @@ import os
 
 def get_db():
     basedir = os.path.abspath(os.path.dirname(__file__))
-    db_path = os.path.join(basedir, 'student-database.db')
+    db_path = os.path.join(basedir, '..', 'student-database.db')
+    db_path = os.path.abspath(db_path)
     print('Connecting to DB at:', db_path)
     con = sqlite3.connect(db_path)
     con.row_factory = sqlite3.Row
