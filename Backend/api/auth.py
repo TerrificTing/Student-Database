@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect, url_for
+from flask import Blueprint, redirect, url_for, session
 from flask_dance.contrib.google import make_google_blueprint, google
 from flask_login import login_user
 import os
@@ -21,14 +21,14 @@ def create_user_database():
     con = get_db()
     cur = con.cursor()
     cur.execute("""
-                CREATE TALBE IF NOT EXISTS users(
+                CREATE TABLE IF NOT EXISTS users(
                 google_id TEXT PRIMARY KEY,
                 username TEXT NOT NULL)
                 """)
     con.commit()
 
 # Define Google login route
-@google_bp.route("/login")
+@google_bp.route("/auth")
 def google_login():
     try:
         if not google.authorized:
@@ -37,6 +37,7 @@ def google_login():
         try:
             # Get user info from Google
             google_info = google.get("/oauth2/v2/userinfo")
+            session.pop('google_oauth_token', None)
             google_info.raise_for_status()
 
         except HTTPError as e:
