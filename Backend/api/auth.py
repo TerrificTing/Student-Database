@@ -16,6 +16,16 @@ google_bp = make_google_blueprint(
     redirect_to = "google_login"
 )
 
+def create_user_database():
+    con = get_db()
+    cur = con.cursor()
+    cur.execute("""
+                CREATE TALBE IF NOT EXISTS users(
+                google_id TEXT PRIMARY KEY,
+                username TEXT NOT NULL)
+                """)
+    con.commit()
+
 # Define Google login route
 @google_bp.route("/login")
 def google_login():
@@ -47,6 +57,7 @@ def google_login():
         # Create a User instance and log the user in
         user = User(id=google_id, username=username)
         login_user(user)
+
     except Exception as e:
         import traceback
         traceback.print_exc()

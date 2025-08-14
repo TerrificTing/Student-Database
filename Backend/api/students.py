@@ -2,6 +2,7 @@ from collections import defaultdict
 from flask import Flask, request, render_template, redirect, url_for
 import sqlite3
 from datetime import datetime
+from auth import create_user_database
 
 app = Flask(__name__, template_folder = '../Frontend/templates', static_folder = '../Frontend/static')
 
@@ -40,6 +41,7 @@ def create_daily__counter_database():
 def initialize():
     create_student_database()
     create_daily__counter_database()
+    create_user_database()
 
 @app.route('/')
 def index():
