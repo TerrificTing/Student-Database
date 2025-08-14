@@ -14,7 +14,7 @@ google_bp = make_google_blueprint(
     client_id = os.getenv("GOOGLE_CLIENT_ID"),  # Load from .env
     client_secret = os.getenv("GOOGLE_CLIENT_SECRET"),  # Load from .env
     scope=["profile", "email"],
-    redirect_to = "google_login"
+    redirect_to = "google_auth"
 )
 
 def create_user_database():
