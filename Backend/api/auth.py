@@ -38,8 +38,11 @@ def google_login():
             # Get user info from Google
             google_info = google.get("/oauth2/v2/userinfo")
             google_info.raise_for_status()
+
         except HTTPError as e:
             print('Token expired or API error', e)
+            return redirect(url_for('google.login'))
+        
         user_info = google_info.json()
         google_id = user_info.get("id")
         username = user_info.get("name")
