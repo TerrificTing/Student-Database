@@ -19,32 +19,37 @@ google_bp = make_google_blueprint(
 # Define Google login route
 @google_bp.route("/login")
 def google_login():
-    if not google.authorized:
-        return redirect(url_for("google.login"))
+    try:
+        if not google.authorized:
+            return redirect(url_for("google.login"))
 
-    # Get user info from Google
-    google_info = google.get("/oauth2/v2/userinfo")
+        # Get user info from Google
+        google_info = google.get("/oauth2/v2/userinfo")
 
-    user_info = google_info.json()
-    google_id = user_info.get("id")
-    username = user_info.get("name")
+        user_info = google_info.json()
+        google_id = user_info.get("id")
+        username = user_info.get("name")
 
-    # Debug print for development
-    print("Google user info:", user_info)
+        # Debug print for development
+        print("Google user info:", user_info)
 
-    # Check if the user already exists in the database
-    con = get_db()
-    cur = con.cursor()
-    cur.execute('SELECT * FROM users WHERE google_id = ?', (google_id,))
-    user = cur.fetchone()
+        # Check if the user already exists in the database
+        con = get_db()
+        cur = con.cursor()
+        cur.execute('SELECT * FROM users WHERE google_id = ?', (google_id,))
+        user = cur.fetchone()
 
-    if not user:
-        # If the user doesn't exist, create a new one
-        cur.execute('INSERT INTO users (google_id, username) VALUES (?, ?)', (google_id, username))
-        con.commit()
+        if not user:
+            # If the user doesn't exist, create a new one
+            cur.execute('INSERT INTO users (google_id, username) VALUES (?, ?)', (google_id, username))
+            con.commit()
 
-    # Create a User instance and log the user in
-    user = User(id=google_id, username=username)
-    login_user(user)
+        # Create a User instance and log the user in
+        user = User(id=google_id, username=username)
+        login_user(user)
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return f"Interal Server Error: {e}", 500
 
     return redirect(url_for("dashboard"))
