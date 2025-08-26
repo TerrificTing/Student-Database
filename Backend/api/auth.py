@@ -7,7 +7,8 @@ import os
 from dotenv import load_dotenv
 
 # Load .env file
-load_dotenv()
+env_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '.env'))
+load_dotenv(dotenv_path=env_path)
 
 # Set up Google OAuth blueprint
 google_bp = make_google_blueprint(
