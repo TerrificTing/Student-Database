@@ -1,7 +1,7 @@
 from flask import Flask, redirect, url_for
 from flask_login import LoginManager, login_required, current_user
 from Backend.api.auth import google_bp, create_user_database
-from models import User
+from Backend.api.models import User
 
 app = Flask(__name__)
 app.secret_key = "your-secret-key"  # Replace with env var for production
