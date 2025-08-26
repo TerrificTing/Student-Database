@@ -21,8 +21,10 @@ def load_user(user_id):
 
 @app.route("/")
 def home():
-    return "Welcome!"
-
+    return '''
+        <h1>Welcome!</h1>
+        <p>Click here to <a href="/login/auth">Login with Google</a>.</p>
+    '''
 # Example protected route
 @app.route("/dashboard")
 @login_required
