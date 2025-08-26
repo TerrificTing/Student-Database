@@ -1,6 +1,6 @@
 from flask import Flask, redirect, url_for
 from flask_login import LoginManager, login_required, current_user
-from auth import google_bp, create_user_database
+from Backend.api.auth import google_bp, create_user_database
 from models import User
 
 app = Flask(__name__)
