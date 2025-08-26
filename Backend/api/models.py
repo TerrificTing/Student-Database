@@ -1,15 +1,11 @@
-# backend/models.py
 from flask_login import UserMixin
-from flask import g
 import sqlite3
 import os
 
+DATABASE_PATH = os.path.join(os.path.dirname(__file__), "database.db")
+
 def get_db():
-    basedir = os.path.abspath(os.path.dirname(__file__))
-    db_path = os.path.join(basedir, '..', 'student-database.db')
-    db_path = os.path.abspath(db_path)
-    print('Connecting to DB at:', db_path)
-    con = sqlite3.connect(db_path)
+    con = sqlite3.connect(DATABASE_PATH)
     con.row_factory = sqlite3.Row
     return con
 
@@ -18,20 +14,12 @@ class User(UserMixin):
         self.id = id
         self.username = username
 
-    @classmethod
-    def get(cls, google_id):
+    @staticmethod
+    def get(user_id):
         con = get_db()
         cur = con.cursor()
-        cur.execute('"SELECT * FROM users WHERE google_id = ?', (google_id,))
-        user_data = cur.fetchone()
-        if user_data:
-            return cls(user_data['google_id'], user_data['username'])
+        cur.execute("SELECT * FROM users WHERE google_id = ?", (user_id,))
+        row = cur.fetchone()
+        if row:
+            return User(id=row["google_id"], username=row["username"])
         return None
-
-    @classmethod
-    def create(cls, google_id, username):
-        con = get_db()
-        cur = con.cursor()
-        cur.execute('INSERT INTO users (google_id, username) VALUES (?, ?)', (google_id, username))
-        con.commit()
-        return cls(google_id, username)
