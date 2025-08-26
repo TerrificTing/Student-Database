@@ -19,6 +19,10 @@ login_manager.login_view = "google.login"
 def load_user(user_id):
     return User.get(user_id)
 
+@app.route("/")
+def home():
+    return "Welcome!"
+
 # Example protected route
 @app.route("/dashboard")
 @login_required

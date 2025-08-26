@@ -18,6 +18,10 @@ google_bp = make_google_blueprint(
     redirect_to="google_auth"
 )
 
+@google_bp.route("/")
+def login_index():
+    return "Login via Google at /login/auth"
+
 @google_bp.route("/auth", endpoint="google_auth")
 def google_login():
     try:
