@@ -2,7 +2,7 @@ from flask import Blueprint, redirect, url_for, session
 from flask_dance.contrib.google import make_google_blueprint, google
 from flask_login import login_user
 from requests.exceptions import HTTPError
-from models import User, get_db
+from Backend.api.models import User, get_db
 import os
 from dotenv import load_dotenv
 
